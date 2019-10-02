@@ -55,7 +55,8 @@ namespace RazorLight.Tests.Compilation
 				});
 		}
 
-		[Fact]
+
+		[Fact(Skip = "Only for netstandard")]
 		public void Constructor_ConfiguresLanguageVersion()
 		{
 			// Arrange

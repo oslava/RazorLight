@@ -238,6 +238,9 @@ namespace RazorLight.Compilation
 
 			var parseOptions = new CSharpParseOptions(preprocessorSymbols: defines);
 
+#if NETCORE
+			parseOptions = parseOptions.WithLanguageVersion(LanguageVersion.CSharp8);
+#else
 			if (!string.IsNullOrEmpty(dependencyContextOptions.LanguageVersion))
 			{
 				if (LanguageVersionFacts.TryParse(dependencyContextOptions.LanguageVersion, out var languageVersion))
@@ -249,6 +252,7 @@ namespace RazorLight.Compilation
 					Debug.Fail($"LanguageVersion {languageVersion} specified in the deps file could not be parsed.");
 				}
 			}
+#endif
 
 			return parseOptions;
 		}

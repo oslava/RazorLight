@@ -11,6 +11,6 @@ namespace RazorLight
 		TextWriter Writer { get; set; }
 
 
-        dynamic ViewBag { get; }
+		System.Dynamic.ExpandoObject ViewBag { get; }
     }
 }

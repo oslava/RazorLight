@@ -114,7 +114,8 @@ namespace RazorLight.Generation
             using (var stream = projectItem.Read())
             {
                 RazorSourceDocument source = RazorSourceDocument.ReadFrom(stream, projectItem.Key);
-                IEnumerable<RazorSourceDocument> imports = await GetImportsAsync(projectItem);
+
+				IEnumerable<RazorSourceDocument> imports = await GetImportsAsync(projectItem);
 
                 return RazorCodeDocument.Create(source, imports);
             }

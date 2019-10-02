@@ -5,7 +5,7 @@ namespace RazorLight
 {
     public class PageContext : IPageContext
     {
-        private dynamic _viewBag;
+        private ExpandoObject _viewBag;
 
         public PageContext()
         {
@@ -20,7 +20,7 @@ namespace RazorLight
 
         public TextWriter Writer { get; set; }
 
-        public dynamic ViewBag => _viewBag;
+        public ExpandoObject ViewBag => _viewBag;
 
         public string ExecutingPageKey { get; set; }
 

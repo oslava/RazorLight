@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Razor.Extensions;
 using Microsoft.AspNetCore.Razor.Language;
@@ -17,16 +18,20 @@ namespace RazorLight
 					Instrumentation.InjectDirective.Register(builder);
 					Instrumentation.ModelDirective.Register(builder);
 
+#if !NETCORE
 					NamespaceDirective.Register(builder);
 					FunctionsDirective.Register(builder);
 					InheritsDirective.Register(builder);
+#endif
 					SectionDirective.Register(builder);
 
 					builder.Features.Add(new ModelExpressionPass());
 					builder.Features.Add(new RazorLightTemplateDocumentClassifierPass());
 					builder.Features.Add(new RazorLightAssemblyAttributeInjectionPass());
+#if !NETCORE
 					builder.Features.Add(new InstrumentationPass());
-					//builder.Features.Add(new ViewComponentTagHelperPass());
+#endif
+					builder.Features.Add(new ViewComponentTagHelperPass());
 
 					builder.AddTargetExtension(new TemplateTargetExtension()
 					{
@@ -47,10 +52,20 @@ namespace RazorLight
 				throw new System.NotImplementedException();
 			}
 
+#if NETCORE
+			[Obsolete]
+#endif
 			public override RazorProjectItem GetItem(string path)
 			{
 				throw new System.NotImplementedException();
 			}
+
+#if NETCORE
+			public override RazorProjectItem GetItem(string path, string fileKind)
+			{
+				throw new System.NotImplementedException();
+			}
+#endif
 		}
 	}
 }
