@@ -68,6 +68,24 @@ namespace RazorLight
 		/// <param name="content">Content of the template</param>
 		/// <param name="model">Template model</param>
 		/// <param name="viewBag">Dynamic ViewBag</param>
+		[Obsolete]
+		public Task<string> CompileRenderAsync<T>(
+			string key,
+			string content,
+			T model,
+			ExpandoObject viewBag)
+		{
+			return _handler.CompileRenderStringAsync(key, content, model, viewBag);
+		}
+
+		/// <summary>
+		/// Compiles and renders a template. Template content is taken directly from <paramref name="content"/> parameter
+		/// </summary>
+		/// <typeparam name="T">Type of the model</typeparam>
+		/// <param name="key">Unique key of the template</param>
+		/// <param name="content">Content of the template</param>
+		/// <param name="model">Template model</param>
+		/// <param name="viewBag">Dynamic ViewBag</param>
 		public Task<string> CompileRenderStringAsync<T>(
 			string key,
 			string content,
